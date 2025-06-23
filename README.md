@@ -1,4 +1,4 @@
-# PRODIGY_ML_02
+![image](https://github.com/user-attachments/assets/584a0b99-0f08-4fd3-aa21-42b38cc5bdd1)# PRODIGY_ML_02
 # 🛃 Customer Segmentation with K-Means Clustering
 
 This project performs unsupervised customer segmentation using the K-Means clustering algorithm on the [Kaggle Mall Customer Segmentation Data](https://www.kaggle.com/datasets/vjchoudhary7/customer-segmentation-tutorial-in-python).
@@ -23,7 +23,7 @@ To identify and group customers into distinct segments based on **spending behav
 
 - Visualize the results using **Matplotlib and Seaborn**
 
-- Handle known **MKL threading issue on Windows** with a proper workaround
+- Fix common **threading warnings on Windows** when using **KMeans**
 
 ---
 
@@ -38,22 +38,47 @@ To identify and group customers into distinct segments based on **spending behav
 
 ## 🧯 Suppress OMP_NUM_THREADS Warning
 A known issue occurs on Windows with MKL when using KMeans. Use the following methods to avoid repeated warnings:
+```vbnet
+UserWarning: KMeans is known to have a memory leak on Windows with MKL...
+```
+<br>
 
-**🔧 Temporary Fix**
+Use **any** of the following methods to suppress it:
+
+**1. 🔧 Temporary Fix(Anaconda Prompt)**
 
 Run this in Anaconda Prompt before launching the notebook:
 ```bash
   set OMP_NUM_THREADS=1
   jupyter notebook
 ```
+Only affects the current session. Close the terminal = reset.
 
-**🛠 Permanent Fix**
+<br>
+
+**2. 🛠 Permanent Fix(System-Wide)**
+
 Set a system environment variable:
     
   - **Variable name:** OMP_NUM_THREADS
   - **Value:** 1
 
-Then **restart your system** to apply changes. 
+- Then **restart your system** to apply changes. 
+
+This applies to all environments globally.
+
+<br>
+
+**3. 💡 VS Code Notebook Fix (.ipynb)**
+
+If you're using Jupyter Notebooks in VS Code, environment variables set outside won’t apply to the running kernel. You must set it inside your notebook:
+
+In the **first cell**, before any imports:
+```python
+import os
+os.environ["OMP_NUM_THREADS"] = "1"
+```
+✅ Make sure to Restart the Kernel after adding this.
 
 ---
 
