@@ -11,7 +11,7 @@ To identify and group customers into distinct segments based on **spending behav
 
 ---
 
-## 📁 Overview
+## 📁 Task Overview
 
 - Perform K-Means clustering on customers based on:
 
